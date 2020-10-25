@@ -1,0 +1,10 @@
+This program should help my mother to submit reports on
+the average age of children in her group faster and thus
+save a lot of time.
+
+The program reads .xlsx files with a list of students,
+where the date of birth (dd.MM.yy format) is in column C and sex in column G.
+"М" or "м" for a boy and "Д", "д", "Ж" or "ж" for a girl.
+
+The result of calculations will be the number of boys and
+girls distributed by age.

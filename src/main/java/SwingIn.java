@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -9,6 +10,7 @@ public class SwingIn implements ActionListener {
     JFrame jfrm;
     JButton chooseBut;
     JButton calcBut;
+    JButton settings;
     JFileChooser fileChooser;
     JLabel fileLabel;
     JLabel alertLabel;
@@ -30,6 +32,10 @@ public class SwingIn implements ActionListener {
         calcBut = new JButton("Calculate");
         calcBut.addActionListener(this);
         calcBut.setActionCommand("calculate");
+
+        settings = new JButton("Settings");
+        calcBut.addActionListener(this);
+        calcBut.setActionCommand("settings");
 
         fileLabel = new JLabel();
         alertLabel = new JLabel();
@@ -104,6 +110,8 @@ public class SwingIn implements ActionListener {
                     alertLabel.setText("Excel file is filled in incorrectly");
                 }
             }
+        } else if(actionEvent.getActionCommand().equals("settings")){
+
         }
     }
 }
