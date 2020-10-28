@@ -2,6 +2,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.time.LocalDate;
@@ -82,7 +83,7 @@ public class Handler {
         result.add(resArr);
     }
 
-    public void calculate(File file, JBetterSimpleTable table){
+    public void calculate(File file, JTable table){
         Workbook wb = OpenAndSave.reedWorkbook(file);
         Sheet sh = OpenAndSave.getFirstSourceSheet(wb);
         countAges(sh);
