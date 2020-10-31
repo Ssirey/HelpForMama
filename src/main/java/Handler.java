@@ -36,7 +36,6 @@ public class Handler {
         int rowSize = sourceSheet.getPhysicalNumberOfRows();
         ConfigManager configManager = new ConfigManager();
         Properties prop = Config.readConfig();
-        String formatDate = prop.getProperty("formatDate");
         int dateColumn = configManager.dateColumnItems.indexOf(prop.getProperty("dateColumn"));
         int sexColumn = configManager.sexColumnItems.indexOf(prop.getProperty("sexColumn"));
         for (int i = 0; i < rowSize; i++){
