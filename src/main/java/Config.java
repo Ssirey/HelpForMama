@@ -1,22 +1,20 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 public class Config {
-    public static final String PATH_TO_PROPERTIES = "src/main/resources/config.properties";
+    public static final String PATH_TO_PROPERTIES = "config.properties";
 
     public static Properties readConfig(){
-        FileInputStream fileInputStream;
+        InputStream inputStream;
         Properties properties = new Properties();
         try{
-            fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
-            properties.load(fileInputStream);
+            inputStream = Config.class.getResourceAsStream(PATH_TO_PROPERTIES);
+            properties.load(inputStream);
             return properties;
         }
         catch (IOException e){
             System.out.println("Something wrong in config!");
+            System.out.println(e.getMessage());
             return null;
         }
     }
