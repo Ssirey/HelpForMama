@@ -25,9 +25,12 @@ public class MainForm extends JFrame {
         $$$setupUI$$$();
         setTitle("Help for mama");
         setContentPane(mainPanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
         setVisible(true);
         setSize(840, 480);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         chooseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -65,6 +68,15 @@ public class MainForm extends JFrame {
                         resultTable.setModel(model);
                     }
                 }
+            }
+        });
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                SettingsForm settingsForm = new SettingsForm();
+//                Config.readConfig();
+                settingsForm.setLocationRelativeTo(mainPanel);
+                settingsForm.setVisible(true);
             }
         });
     }

@@ -34,19 +34,32 @@ public class Handler {
 
     public void countAges(Sheet sourceSheet){
         int rowSize = sourceSheet.getPhysicalNumberOfRows();
+        ConfigManager configManager = new ConfigManager();
+        Properties prop = Config.readConfig();
+        String formatDate = prop.getProperty("formatDate");
+        int dateColumn = configManager.dateColumnItems.indexOf(prop.getProperty("dateColumn"));
+        int sexColumn = configManager.sexColumnItems.indexOf(prop.getProperty("sexColumn"));
         for (int i = 0; i < rowSize; i++){
-            Cell cell = sourceSheet.getRow(i).getCell(2);
+            Cell cell = sourceSheet.getRow(i).getCell(dateColumn);
 
             //Day of Birth
-            LocalDate dobDate = WorkWithDate.parseStringToDate(
-                    cell.getStringCellValue().replaceAll("(^\\h*)|(\\h*$)",""),
-                    "dd.MM.yy"
-            );
+            LocalDate dobDate;
+            try{
+                dobDate = WorkWithDate.convertToLocalDateViaInstant(cell.getDateCellValue());
+            }
+            catch (Exception e){
+                dobDate = WorkWithDate.parseStringToDate(
+                        cell.getStringCellValue().replaceAll("(^\\h*)|(\\h*$)",""),
+                        prop.getProperty("formatDate")
+                );
+            }
+            assert dobDate != null;
             //Current day
             LocalDate currentDate = WorkWithDate.convertToLocalDateViaInstant(new Date());
 
+
             int age = WorkWithDate.calculateAge(dobDate, currentDate);
-            String sex = sourceSheet.getRow(i).getCell(6).getStringCellValue();
+            String sex = sourceSheet.getRow(i).getCell(sexColumn).getStringCellValue();
 
             if ("м".equals(sex) || "M".equals(sex)){
                 if(boys.get(age) == null){
