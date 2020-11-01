@@ -47,9 +47,12 @@ public class Handler {
                 dobDate = WorkWithDate.convertToLocalDateViaInstant(cell.getDateCellValue());
             }
             catch (Exception e){
+//                dobDate = WorkWithDate.parseStringToDate(
+//                        cell.getStringCellValue().replaceAll("(^\\h*)|(\\h*$)",""),
+//                        prop.getProperty("formatDate")
+//                );
                 dobDate = WorkWithDate.parseStringToDate(
-                        cell.getStringCellValue().replaceAll("(^\\h*)|(\\h*$)",""),
-                        prop.getProperty("formatDate")
+                        cell.getStringCellValue().replaceAll("(^\\h*)|(\\h*$)","")
                 );
             }
             assert dobDate != null;

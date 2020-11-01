@@ -8,6 +8,13 @@ public class Config {
         InputStream inputStream;
         Properties properties = new Properties();
         try{
+            inputStream = new FileInputStream(PATH_TO_PROPERTIES);
+            properties.load(inputStream);
+            return properties;
+        } catch (Exception e) {
+            System.out.println("config wasn't found in same directory");
+        }
+        try{
             inputStream = Config.class.getResourceAsStream(PATH_TO_PROPERTIES);
             properties.load(inputStream);
             return properties;
