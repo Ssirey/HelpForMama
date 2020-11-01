@@ -12,10 +12,8 @@ public class SettingsForm extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JComboBox formatCB;
     private JComboBox dateCB;
     private JComboBox sexCB;
-    private JLabel dateFormat;
     private JLabel dateColumn;
     private JPanel mainSettingsPane;
     private JLabel sexColumn;
@@ -60,7 +58,6 @@ public class SettingsForm extends JDialog {
         // add your code here
         Properties properties = Config.readConfig();
         assert properties != null;
-        properties.setProperty("formatDate", (String) formatCB.getSelectedItem());
         properties.setProperty("dateColumn", (String) dateCB.getSelectedItem());
         properties.setProperty("sexColumn", (String) sexCB.getSelectedItem());
         Config.closeConfig(properties);
@@ -77,6 +74,13 @@ public class SettingsForm extends JDialog {
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        ConfigManager configManager = new ConfigManager();
+        dateCB = new JComboBox(configManager.formSettings("dateColumn"));
+        sexCB = new JComboBox(configManager.formSettings("sexColumn"));
     }
 
     /**
@@ -105,20 +109,16 @@ public class SettingsForm extends JDialog {
         buttonCancel.setText("Cancel");
         panel2.add(buttonCancel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mainSettingsPane = new JPanel();
-        mainSettingsPane.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        mainSettingsPane.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         contentPane.add(mainSettingsPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        dateFormat = new JLabel();
-        dateFormat.setText("Формат даты");
-        mainSettingsPane.add(dateFormat, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         dateColumn = new JLabel();
         dateColumn.setText("Столбец с датой");
-        mainSettingsPane.add(dateColumn, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainSettingsPane.add(dateColumn, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         sexColumn = new JLabel();
         sexColumn.setText("Столбец с полом");
-        mainSettingsPane.add(sexColumn, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        mainSettingsPane.add(formatCB, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        mainSettingsPane.add(dateCB, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        mainSettingsPane.add(sexCB, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainSettingsPane.add(sexColumn, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainSettingsPane.add(dateCB, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainSettingsPane.add(sexCB, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
         contentPane.add(spacer2, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
     }
@@ -128,13 +128,5 @@ public class SettingsForm extends JDialog {
      */
     public JComponent $$$getRootComponent$$$() {
         return contentPane;
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-        ConfigManager configManager = new ConfigManager();
-        formatCB = new JComboBox(configManager.formSettings("formatDate"));
-        dateCB = new JComboBox(configManager.formSettings("dateColumn"));
-        sexCB = new JComboBox(configManager.formSettings("sexColumn"));
     }
 }

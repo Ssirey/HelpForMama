@@ -3,21 +3,9 @@ import java.util.Arrays;
 import java.util.Properties;
 
 public class ConfigManager {
-    public ArrayList<String> formatItems;
     public ArrayList<String> dateColumnItems;
     public ArrayList<String> sexColumnItems;
     ConfigManager() {
-        formatItems = new ArrayList<>(Arrays.asList(
-            "MM/dd/YYYY",
-            "MM/dd/YY",
-            "dd.MM.yyyy",
-            "dd.MM.yy",
-            "dd/MM/yyyy",
-            "dd/MM/yy",
-            "dd-MM-yyyy",
-            "dd-MM-yy")
-        );
-
         dateColumnItems = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"));
 
         sexColumnItems = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"));
@@ -26,9 +14,6 @@ public class ConfigManager {
     public String[] formSetting(Properties prop, String key){
         ArrayList<String> defaultSet;
         switch (key) {
-            case ("formatDate"):
-                defaultSet = new ArrayList<>(formatItems);
-                break;
             case ("dateColumn"):
                 defaultSet = new ArrayList<>(dateColumnItems);
                 break;
